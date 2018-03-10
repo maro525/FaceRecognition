@@ -1,0 +1,27 @@
+{% extends "basic.html" %}
+
+{%  block content %}
+    <div class="container">
+        <img src="{{ url_for('video_feed') }}" alt="">
+    </div>
+    <div class="container">
+        <form action="{{ url_for('index') }}" method="post">
+            {% if analyze_running %}
+                <button type="submit" name="analyze" value="off" class="btn btn-primary">FACE ANALYZE OFF</button>
+            {% else %}
+                <button type="submit" name="analyze" value="on" class="btn btn-primary">FACE ANALYZE ON</button>
+            {% endif %}
+            {% if video_running %}
+                <button type="submit" name="video" value="stop" class="btn btn-primary">VIDEO STOP</button>
+            {% else %}
+                <button type="submit" name="video" value="start" class="btn btn-primary">VIDEO START</button>
+            {% endif %}
+        </form>
+    </div>
+
+    <div class="container">
+        {% if analyze_running %}
+            <div id="info"></div>
+        {% endif %}
+    </div>
+{% endblock %}
