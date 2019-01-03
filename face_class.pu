@@ -1,0 +1,53 @@
+@startuml
+
+title 顔認証アプリケーション
+
+package カメラクラス {
+    abstract class BaseCamera {
+        thread
+        frame
+        last_access
+        event
+
+        _init__()
+        get_frame()
+        frame()
+        _thread()
+    }
+    note left: カメラの抽象クラス
+
+    class CameraEvent {
+        __init__()
+        wait()
+        set()
+        clear()
+    }
+    note left: 順番にビデオのフレームを送るためのイベントクラス
+
+    class Camera {
+        video_source
+
+        set_video_source()
+        frames()
+    }
+    note left: webカメラを使うためのクラス
+
+    BaseCamera <|-- Camera
+}
+
+class FaceDetector {
+        json_file_path
+        tolerance
+        known_faces
+
+        load_face()
+        load_image_from_folder(path)
+        record_face(image, name)
+        get_info_from_image(image, name)
+        save_to_json()
+        analyze_faces_in_image(image)
+        draw_rect(image, faces)
+}
+note right: 顔分析するクラス
+
+@enduml
